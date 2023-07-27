@@ -1,0 +1,33 @@
+{% extends 'register/listing_base.html' %}
+{% block content %}
+
+<div align = "center">
+<h3>Please input your new login info:</h3>
+
+<form class = "edit_profile_container" action="" method="post" novalidate>
+    {% csrf_token %}
+    <!-- {{ form.as_p }} -->
+        <div class="" align="left">
+            <label>{{form.email.label}}</label>
+            {{form.email}}
+            <p style = "color:red;">{{form.email.errors.0}}</p>
+        </div>
+        <div class="" align="left">
+            <label>{{form.password.label}}</label>
+            {{form.password}}  
+            <p style = "color:red;">{{form.password.errors.0}}</p>
+        </div>
+        <div class="row">
+            <div class = "col">
+                <button type="submit" class="btn btn-warning" style="width: 150px">Submit</button>
+            </div>
+            <div class = "col">
+                <a class="button btn btn-outline-secondary"  style="width: 150px" href="{% url 'register:homepage' %}">Ruturn Home</a>
+            </div>
+        </div>
+
+
+</form>
+
+</div>
+{% endblock %}

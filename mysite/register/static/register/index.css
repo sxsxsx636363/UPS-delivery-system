@@ -1,0 +1,140 @@
+.homebox{
+  width: 75%;
+  height: 80px;
+  margin:auto;
+  padding: 10px 20px;
+  /* margin-top: 20px; */
+  /* background-color: rgb(106, 76, 58); */
+  /* border: 1px das rgb(228,228,228);  */
+  text-align: left;
+}
+.valign{
+  align-content: center;
+  /* align-self: center; */
+  /* margin:auto */
+  /* align-items: center; */
+}
+.h2text{
+  font-weight:bold;
+  font-size: 35px;
+  /* margin:auto; */
+  /* text-align: center; */
+  /* padding: 15px 15px; */
+  /* align-content: center; */
+  /* align-items: center; */
+  /* align-self: center; */
+}
+.center{
+  align-self: center;
+}
+.padboth15{
+  padding: 15px 15px;
+}
+.gray-text {
+  color: #00000046;
+}
+.pad15{
+  padding: 0px 15px;
+}
+.pad40{
+  padding: 0px 40px;
+}
+.pad30{
+  padding: 80px;
+}
+.content {           
+  position: absolute;
+  left: 35%;
+  width: 80%;
+  margin-left: -15%;
+  top: 35%;
+  height: 30%;
+  margin-top: -15%;          
+}
+.bg_brown {
+  background-color: rgb(106, 76, 58);    
+}
+
+.inputbox{
+width: 100%;
+height:90%;
+/* margin: auto; */
+margin-top: 10px;
+background-color: rgb(255, 255, 255);
+/* border: 1px solid rgb(228,228,228); */
+text-align: left;
+
+}
+
+.topbox{
+  padding: 2rem 2rem;
+  margin-bottom: 2rem;
+  background-color: #60342a8f;
+  border-radius: 0.3rem;
+}
+.edit_profile_container {
+  background-color: transparent;
+  border: 1px dashed rgba(128, 128, 128, 0.433);
+  padding: 35px;
+  width: 50%;
+  margin: 20px 0 auto;
+  border-radius: 10px;
+
+}
+
+/* .sign_in_container {
+  background-color: white;
+  padding: 45px;
+  width: 35%;
+  margin-top: 100px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+
+} */
+
+
+.sign_in_container {
+  background-color: white;
+  /* border: 1px dashed rgba(128, 128, 128, 0.433); */
+  padding: 45px;
+  width: 35%;
+  /* margin-top: 100px; */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+
+}
+#my-image {
+  position: absolute;
+  left: 0;
+}
+
+#top_bottom_right {
+  position: absolute;
+  right: 200px;
+  top: 0px;
+}
+
+#bottom_top_left {
+  position: absolute;
+  left: 200px;
+  bottom: 0px;
+}
+
+#r_l_b {
+  position: absolute;
+  right: 0;
+  bottom: 50px;
+}
+
+.round_button {
+  font-size: 24px;
+  padding: 20px 40px;
+  background-color: #fad24daa;
+  border-color: #000000;
+  color: black;
+  border-radius: 80px;
+}

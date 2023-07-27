@@ -1,0 +1,84 @@
+{% extends 'register/listing_base.html' %}
+
+{% block content %}
+
+<style>
+    .btn-track {
+        background-color: transparent;
+        border-color: #e9ab0d;
+    }
+    .btn-view {
+        background-color: transparent;
+        border-color: #e9ab0d;
+    }
+    .btn-lg {
+        font-size: 20px;
+        padding: 10px 20px;
+    }
+    .btn-primary {
+        background-color: #fad24daa;
+        border-color: #00000086;
+        color: rgba(0, 0, 0, 0.589);
+    }
+    .btn-primary:hover {
+        background-color: #c4a160;
+        border-color: #b5881f;
+    }
+    .rounded-pill {
+        border-radius: 80px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <div class="card mb-4">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">{{ user.username }}, Your Orders</h5>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Package ID</th>
+                                <th>Status</th>
+                                <th>Address</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in pending_package %}
+                            <tr>
+                                <td>{{ i.tracking_id }}</td>
+                                <td>{{ i.status }}</td>
+                                <td>{{'('}}{{i.deliver_x}}{{', '}} {{i.deliver_y}}{{')'}}</td>
+                                <td>
+                                    <a href="{% url 'register:package_detail' tracking_id=i.tracking_id %}"
+                                        class="btn btn-warning btn-sm btn-track">Track Package</a >
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% for i in completed_package %}
+                            <tr>
+                                <td>{{ i.tracking_id }}</td>
+                                <td>Delivered</td>
+                                <td>{{'('}}{{i.deliver_x}}{{', '}} {{i.deliver_y}}{{')'}}</td>
+                                <td>
+                                    <a href="{% url 'register:package_detail' tracking_id=i.tracking_id %}"
+                                        class="btn btn-warning btn-sm btn-view">View Details</a >
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div align = "center">
+        <a href="{% url 'register:package_list'%}" class="btn btn-lg btn-primary rounded-pill" style="width: 200px;">Refresh</a>
+    </div>
+
+</div>
+
+{% endblock %}

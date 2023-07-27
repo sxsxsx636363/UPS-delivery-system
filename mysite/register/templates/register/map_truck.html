@@ -1,0 +1,92 @@
+{% extends 'register/listing_base.html' %}
+<script>
+    setInterval(function() {
+      location.reload();
+    }, 500); // Refresh every 10 seconds
+  </script>
+{% block content %}
+<style>
+    /* Style for table text */
+    canvas {
+        border: solid 1px #ccc;
+        margin-top: 20px;
+       
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body text-center">
+                {% if status == "delivered"  %}
+                <h5 class="display-8">Your Package {{cur_package.tracking_id}} is {{status}} to the appointed address.</h5>
+                {% endif %}
+                {% if status == "delivering"  %}
+                <h5 class="display-8">Your Package {{cur_package.tracking_id}} is on {{status}}, the truck is on the way.</h5>
+                {% endif %}
+                {% if status == "at warehouse"  %}
+                <h5 class="display-8">Your Package {{cur_package.tracking_id}} is still at warehouse {{cur_package.warehouse_id}} .</h5>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+<div class="container text-center">
+    <!-- Canvas to display a picture and draw a point -->
+    <canvas id="myCanvas" class="mx-auto" width="500" height="300"></canvas>
+    
+    <!-- Script to draw a point on the canvas -->
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var img = new Image();
+        img.onload = function() {
+            canvas.width = img.naturalWidth*1/2;
+            canvas.height = img.naturalHeight*1/2;
+            var scaleX = canvas.width / img.width;
+            var scaleY = canvas.height / img.height;
+            var scale = Math.min(scaleX, scaleY);
+            var x = "{{ x }}";
+            var y = "{{ y }}";
+            ctx.drawImage(img, 0, 0, img.width*scale, img.height*scale);
+            var truck = new Image();
+            truck.onload = function() {
+                ctx.save(); // Save the current context state
+                // ctx.scale(-1, 1); // Mirror flip the image horizontally
+                ctx.drawImage(truck, x * 20 * scale + truck.width * scale*0.2-150, y * 20 * scale, truck.width * scale*0.2, truck.height * scale *0.2);
+                 // Restore the context to its previous state
+                // Render the text normally, outside the save/restore block
+                ctx.font = "14px Arial";
+                ctx.fillStyle = "red";
+                ctx.fillText(`(${x}, ${y})`, x * 20 * scale + truck.width * scale*0.2 - 38, y * 20 * scale + 15);
+                ctx.restore();
+            };
+
+            truck.src = "/static/middle_car.png";
+            ctx.fill();
+        };
+        img.src = "/static/map.png";  
+    </script>
+    </div>
+    
+    
+    <div class="container text-center padboth15">
+        <div class="row">
+            <div class="col">
+                <a href="#" onclick="history.back()" class="btn btn-secondary" style="width: 150px">
+                    <i class="fa fa-chevron-left"></i> Go Back
+                </a >
+                
+            </div>
+            <div class="col">
+                <a href="{% url 'register:map_truck' tracking_id=tracking_id %}">
+                    <button class="btn btn-warning" style="width: 150px;">Refresh</button>
+                </a >   
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}

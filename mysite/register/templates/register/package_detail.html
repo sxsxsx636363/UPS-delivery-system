@@ -1,0 +1,143 @@
+{% extends 'register/listing_base.html' %}
+
+{% block content %}
+<style>
+    /* Style for table text */
+    table {
+        font-size: 16px;
+        color: #444;
+        border-collapse: collapse;
+        border: none;
+        width: 100%;
+    }
+    th, td {
+        border: solid 1px #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+    th {
+        background-color: #eee;
+    }
+    canvas {
+        border: solid 1px #ccc;
+        margin-top: 20px;
+       
+    }
+    .btn-lg {
+        font-size: 20px;
+        padding: 10px 20px;
+    }
+    .btn-primary {
+        background-color: #fad24daa;
+        border-color: #0000007f;
+        color: rgba(0, 0, 0, 0.541);
+    }
+    .btn-primary:hover {
+        background-color: #c4a160;
+        border-color: #b5881f;
+    }
+    .rounded-pill {
+        border-radius: 80px;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body text-center">
+                <h5 class="display-8">Package Information</h5>
+            </div>
+            {% if status == "delivered" %}
+            <div class="card card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Package ID</th>
+                            <th>Status</th>
+                            <th>Product Description</th>
+                            <th>Item Amount</th>
+                            <th>Delivery Address</th>
+                            <th>Report</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ tracking_id }}</td>
+                            <td>{{ status }}</td>
+                            <td>{{ description }}</td>
+                            <td>{{ count }}</td>
+                            <td>{{ '(' }}{{ deliver_x }}, {{ deliver_y }}{{ ')' }}</td>
+                            <td>
+                                <a href="{% url 'register:report_issue' tracking_id=tracking_id %}">
+                                    <button class="btn btn-sm btn-outline-secondary">Report issue</button>
+                                </a >
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+
+            {% if status != "delivered"  %}
+            <div class="card card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Package ID</th>
+                            <th>Status</th>
+                            {% if seeDes == 1 %}
+                            <th>Product Description</th>
+                            <th>Item Amount</th>
+                            {% endif %}
+                            <th>Delivery Address</th>
+                            {% if flag == 1 %}
+                            <th>Edit Address</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ tracking_id }}</td>
+                            <td>{{ status }}</td>
+                            {% if seeDes == 1 %}
+                            <td>{{ description }}</td>
+                            <td>{{ count }}</td>
+                            {% endif %}
+
+                            <td>{{ '(' }}{{ deliver_x }}, {{ deliver_y }}{{ ')' }}</td>
+                            {% if flag == 1 %}
+                            <td>
+                                <a href="{% url 'register:change_dest' tracking_id=tracking_id %}">
+                                    <button class="btn btn-sm btn-outline-secondary">Change Address</button>
+                                </a >
+                            </td>
+                            {% endif %}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+   <div class = "row padboth15" align = "center">
+    {% if seeLocation == 1 %}
+        <div class="col-md">
+            <a href="{% url 'register:map_truck' tracking_id=tracking_id %}">
+                <button class="btn btn-lg btn-primary rounded-pill" style="width: 250px;">Current location</button>
+            </a >
+        </div>
+
+    {% endif %}
+        <div class="col-md">
+            <a href="{% url 'register:package_detail' tracking_id=tracking_id %}" class="btn btn-lg  btn-primary rounded-pill" style="width: 200px;">Refresh</a>
+        </div>
+    </div>
+</div>
+    <style>
+
+    </style>
+
+</div>
+
+{% endblock %}

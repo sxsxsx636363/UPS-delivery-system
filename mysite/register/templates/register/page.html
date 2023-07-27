@@ -1,0 +1,81 @@
+{% extends 'register/header.html' %}
+
+{% block content %}
+
+{% include 'register/status.html' %}
+
+<br>
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5>Your Orders:</h5>
+        </div>
+        <hr>
+        <div class="card card-body" style="background-color: #eae0c7;">
+            <a class="btn btn-primary  btn-sm btn-block" style="background-color: #e9ab0d;"
+                href="{% url 'track_package' %}">Tracking Packages</a>
+            <table class="table">
+                <tr>
+                    <th>PackageID</th>
+                    <th>Status</th>
+                </tr>
+                {% for i in orders %}
+                <tr>
+                    <td>{{i.package_id}}</td>
+                    <td>{{i.status}}</td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-black  mb-3" id="total-orders">
+                <div class="card-header">
+                    <a class="card-title" href="{% url 'packages' %}">Total Orders</a>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{total_orders}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-Black  mb-3" id="orders-delivered">
+                <div class="card-header">
+                    <a class="card-title" href="{% url 'pending' %}">Orders Pending</a>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{pending_num}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="col-md">
+            <div class="card text-center text-Black  mb-3" id="orders-pending">
+                <div class="card-header">
+                    <a class="card-title">Orders Completed</a>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-title">{{completed_num}}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

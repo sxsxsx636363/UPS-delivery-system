@@ -1,0 +1,48 @@
+{% extends "register/header.html" %}
+
+{% block content %}      
+
+{% load crispy_forms_tags %}
+
+<!--Login--> 
+<div>  
+  <img id="my-image" src="/static/minicar.png" alt = "photo escaped" width = "200px">
+</div>
+<div>  
+  <img id="r_l_b" src="/static/r_l_minicar.png" alt = "photo escaped" width = "200px">
+</div>
+<!-- <div>  
+  <img id="top_bottom_right" src="/static/minibox.png" alt = "photo escaped" width = "100px">
+</div>
+<div>  
+  <img id="bottom_top_left" src="/static/minibox.png" alt = "photo escaped" width = "100px">
+</div> -->
+<section style="background-color: #b59c962e; height: 100vh; padding-top: 100px;">
+<div class="sign_in_container" align = "center">
+            <h3 class="mb-3">Sign in</h3>
+            <form method="POST">{% csrf_token %}
+            <div class="form-outline mb-3">
+
+              {% for message in messages %}
+                  <div class="alert alert-success">
+                      <a class="close" href="#" data-dismiss="alert"></a>
+                        {{ message }}
+                  </div>
+              {% endfor %}
+              <div align = "left">
+                {{ login_form|crispy }}
+              </div>
+
+
+                <br>
+                <button class="btn btn-primary btn-lg" type="submit">Login</button>
+                </br>
+              
+            </div>
+          </form>
+            <p class="text-center">Don't have an account? <a href="/register">Create an account</a>.</p>
+  </div>
+</section>
+
+{% endblock %}
+

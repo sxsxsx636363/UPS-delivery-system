@@ -1,0 +1,79 @@
+syntax = "proto2";
+
+message Connect{ //after USP conncet to the world, send this to Amazon
+  required int64 worldid = 1;
+}
+
+message InitWarehouse{
+  required int32 id = 1;
+  required int32 x = 2;
+  required int32 y = 3;
+}
+
+message Connected{//after amazon success connected, send this to UPS
+  required bool result = 1;
+  repeated InitWarehouse initwh = 2;
+}
+
+message Item{
+  required string description = 1; //
+  required int32 quantity = 2; //
+}
+
+message AmazonUPSInitShip {
+  required int32 id = 1;
+  required int32 wid = 2;  // warehouse id
+  repeated Item items = 3;//the item informaiton used for UPS front end
+  required int64 packageid = 4;  // unique tracking number
+  required int32 x = 5;  // delivery destination x
+  required int32 y = 6;  // delivery destination y
+  required int32 username = 7;
+}
+
+message UPSAmazonInitShip {
+  required int32 id = 1;
+  required int32 truckid = 2;  // truck number so that Amazon knows which truck to load packages to
+  required int64 packageid = 4;  // unique tracking number
+}
+
+message AmazonUPSStartShip {
+  required int32 id = 1;
+  required int64 packageid = 2;  // ready to pick up
+}
+
+message UPSAmazonStartShip {
+  required int32 id = 1;
+  required int64 packageid = 2;  // truck has arrived, start loading
+}
+
+message AmazonUPSFinishShip {
+  required int32 id = 1;
+  required int64 packageid = 2;  // finish load
+}
+
+message UPSAmazonFinishShip {
+  required int32 id = 1;
+  required int64 packageid = 2;  // arrival destination
+}
+
+message Err {
+  required string err = 1;
+  required int64 originseqnum = 2;
+  required int64 seqnum = 3;
+}
+
+message AmazonCommands {
+  repeated AmazonUPSInitShip initship = 1;
+  repeated AmazonUPSStartShip startship = 2;
+  repeated AmazonUPSFinishShip finishship = 3;
+  repeated Err error = 4;
+  repeated int64 acks = 5;
+}
+
+message UPSCommands {
+  repeated UPSAmazonInitShip initship = 1;
+  repeated UPSAmazonStartShip startship = 2;
+  repeated UPSAmazonFinishShip finishship = 3;
+  repeated Err error = 4;
+  repeated int64 acks = 5;
+}

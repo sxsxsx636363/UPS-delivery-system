@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+    <meta charset="utf-8">
+    <!-- Bootstrap CSS -->
+    <title>miniUPS Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-BlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBlaBla==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'register/index.css' %}">
+     </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container-fluid" align="left">
+                <a  class="pad15" ><img src = "/static/miniups.jpg" alt = "photo escaped" width = "50px" ></a>
+                <a class="navbar-brand" href="#">Welcome to Mini-UPS</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="False" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register:homepage'%}">Home</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        {% if user.is_authenticated %}            
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register:package_list'%}">View Packages</a>
+                        </li>
+                        <li class="navbar-nav dropdown" >        
+                            <a class="nav-link dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"><img src = "/static/login_icon.png" alt = "photo escaped" width = "35px" >{{user.username}}</a>
+                              <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'register:user_view_profile'%}">User Profile</a></li>
+                                <li><a class="dropdown-item" href="{% url 'register:user_edit_profile'%}">Edit Profile</a></li>
+                              </ul>            
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register:logout'%}">Logout</a>
+                        </li>
+                        {% endif %} 
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <main>
+            <section class="topbox text-center">
+                <h2 class="display-4">Welcome to  Mini-UPS</h2>
+                <img src = "/static/draw.png" alt = "photo escaped" width = "600px" >
+            </section>
+            
+            <div class="container">
+
+               {% block content %}{% endblock %}
+               
+            </div>
+        </main>
+
+        <footer class="bg-light mt-5 py-3" >
+          <div class="container">
+            <div class="row">
+              <div class="col-md-4">
+                <h5 style="color: #0000009a;">About Us</h5>
+                <p style="color: #0000009a;">We provide reliable delivery and logistics services to customers worldwide.</p>
+              </div>
+              <div class="col-md-4">
+                <h5 style="color: #0000009a;">Contact Us</h5>
+                <ul class="list-unstyled">
+                  <li class="mb-2" style="color: #0000009a;"><i class="bi bi-telephone" style="color: #0000009a;"></i> Phone: 9843129706</li>
+                  <li class="mb-2" style="color: #0000009a;"><i class="bi bi-envelope" style="color: #0000009a;"></i> Email: yyan0916@outlook.com</li>
+                </ul>
+              </div>
+              <div class="col-md-4">
+                <h5 style="color: #0000009a;">Follow Us</h5>
+                <ul class="list-unstyled">
+                  <li class="mb-2" style="color: #0000009a;"><a href="#" class="fab fa-facebook"><span class="sr-only" style="color: #0000009a;">Facebook</span></a> Facebook: Mini_ups_xin_Official</li>
+                  <li class="mb-2" style="color: #0000009a;"><a href="#" class="fab fa-twitter"><span class="sr-only" style="color: #0000009a;">Twitter</span></a> Twitter: @Mini_ups_xin_Official</li>
+                  <li class="mb-2" style="color: #0000009a;"><a href="#" class="fab fa-instagram"><span class="sr-only" style="color: #0000009a;">Instagram</span></a> Instagram: mini_ups_official</li>
+                </ul>
+              </div>
+            </div>
+            <hr>
+            <p class="text-center" style="color: #0000009a;">&copy; 2023 UPS. All rights reserved.</p>
+          </div>
+        </footer>
+        
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+ </body>
+</html>

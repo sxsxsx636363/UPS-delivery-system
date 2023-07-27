@@ -1,0 +1,50 @@
+{% extends 'register/listing_base.html' %}
+
+{% block content %}
+<style>
+  .btn-save {
+    background-color: #ddcd525a; /* Green */
+    color: rgb(3, 2, 2);
+}
+</style>
+
+<div class="container">
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-8">
+      {% if flag == 0 %}
+      <div class="alert alert-danger" role="alert">
+        You do not have permission to edit the address of this package.
+      </div>
+      {% else %}
+      {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+      <div align="center">
+      <div >
+        <h3 class="text-center">Change Delivery Address</h3>
+      </div>
+      <div class = "edit_profile_container" align="center">
+      <form  method="POST" align="left">
+            {% csrf_token %}
+              {{ form.as_p }}
+            <div class="form-group d-flex justify-content-center">
+              <button class="btn btn-warning" type="submit" style="width: 150px">Save</button>
+            </div>
+      </form>
+      </div>
+      {% endif %}
+      <br>
+      <a href="{% url 'register:package_detail' tracking_id=tracking_id %}"
+      class="btn btn-warning" style="width: 150px">Go back</a>
+      </br>
+    </div>
+      
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

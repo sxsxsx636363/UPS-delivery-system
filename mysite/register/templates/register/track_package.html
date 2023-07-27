@@ -1,0 +1,18 @@
+{% extends 'register/listing_base.html' %}
+
+{% block content %}
+<div class="content">
+<br>
+
+</br>
+
+<form action="" method="post" novalidate> {% csrf_token %}
+    {% csrf_token %}
+    {{ form.as_p }}
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<br>
+<button class="btn btn-outline-info" onclick="history.back()">Go Back</button>
+</br>
+</div>
+{% endblock %}
