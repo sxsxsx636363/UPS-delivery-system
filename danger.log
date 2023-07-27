@@ -1,0 +1,21 @@
+1. The original name of the python file: socket.py, which lead some misunderstood and will not get the system library and get the error when we build socket.socket(socket.AF_INET, socket.SOCK_STREAM):
+AttributeError: module 'socket' has no attribute 'AF_INET'. The solution is to rename the python file: upssocket.py 
+
+2. Add permisson check for some pages like:  directly enter http://vcm-30506.vm.duke.edu:8000/change_dest/13/ without logged in, system will display an message saying  "You do not have permission to edit the address of this package"
+   The UI and corresponding for logged and unlogged users differ. For packages, only if the user is logged in and the current user ID matches the package owner user id, then the details(item description, amount) and change destination button will be shown
+   Add "@login_required" for related functions in views.py and check if request.user.id=package.user_id
+
+3. For database update operations, we firstly check if there is corresponding package_id, truck_id exist, then we do update, otherwise we print the error message and then return.
+   For some insertion operations, we use try/catch block to handle exceptions.
+
+4. To handle errors from amazon and from world, ack are used and sequence numbers are stored in our database to ensure world and amazon receive our message and do rollback when error occuring.
+
+5. We use a query to acquire the truck location for real-time mapping function in our map_truck page.
+
+6. For the username that we get from amazon to add package in our database. Check whether the username exists in our database. If exists, then do normal operations to bond this package to corresponding existed account. Otherwise, add package with default user_id=-1 for unlogged user to easily track.
+
+7. If username send by Amazon did't found in UPS database, ups will send back an error message to let the Amazon know the user didn't exist. But this will not abort the process, the process will continue running
+and set the username to -1 and will not change the username later even if the user has regitered with username = 1 after we set it. The only methods to check the order is to 
+search the order by its tracking number.
+
+8. Since we add mapping functions, so there is a limitation of the map thus the value of (x,y). x=0-80 while y=0-50
